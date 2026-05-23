@@ -29,6 +29,12 @@ O projeto roda totalmente no front-end, sem backend. As informacoes cadastradas 
 
 ## Como Rodar
 
+Versao publicada:
+
+```text
+https://hudsonneves.github.io/granaup/
+```
+
 Instale as dependencias:
 
 ```bash
