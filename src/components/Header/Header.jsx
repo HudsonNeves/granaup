@@ -5,7 +5,9 @@ const navItems = [
   { id: 'calendario', label: 'Calendário' },
 ]
 
-export function Header({ activePage, onNavigate, profile, userLabel }) {
+export function Header({ activePage, onNavigate, onToggleThemeMode, profile, themeMode, userLabel }) {
+  const isLightTheme = themeMode === 'light'
+
   return (
     <header className="header">
       <button className="brand" type="button" onClick={() => onNavigate('dashboard')}>
@@ -28,9 +30,20 @@ export function Header({ activePage, onNavigate, profile, userLabel }) {
         </nav>
       )}
 
-      <div className="profile-chip" aria-label="Perfil atual">
-        <span>{profile ? profile.avatar.icone : '✨'}</span>
-        <strong>{userLabel}</strong>
+      <div className="header-actions">
+        <button
+          aria-pressed={isLightTheme}
+          className="theme-toggle"
+          type="button"
+          onClick={onToggleThemeMode}
+        >
+          {isLightTheme ? 'Tema escuro' : 'Tema claro'}
+        </button>
+
+        <div className="profile-chip" aria-label="Perfil atual">
+          <span>{profile ? profile.avatar.icone : '✨'}</span>
+          <strong>{userLabel}</strong>
+        </div>
       </div>
     </header>
   )

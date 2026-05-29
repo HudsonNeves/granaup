@@ -5,11 +5,11 @@ export const avatares = [
 ]
 
 export const fontesDeRenda = [
-  'Pé-de-Meia',
-  'Auxílio Estudante',
+  'Pé de Meia',
+  'Bolsa Formação',
+  'Salário Aprendizagem',
+  'Freelance',
   'Mesada',
-  'Estágio/Jovem Aprendiz',
-  'Bicos',
 ]
 
 export const objetivosRapidos = [

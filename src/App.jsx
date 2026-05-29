@@ -10,6 +10,7 @@ import { desafios, metas, pagamentos, transacoes } from './data/mockData'
 import './styles/global.css'
 
 const initialProfile = getStorageItem('profile')
+const initialThemeMode = getStorageItem('themeMode', 'dark')
 const initialAppData = getStorageItem('appData', {
   transacoes,
   metas,
@@ -21,10 +22,15 @@ function App() {
   const [profile, setProfile] = useState(initialProfile)
   const [appData, setAppData] = useState(initialAppData)
   const [activePage, setActivePage] = useState(initialProfile ? 'dashboard' : 'onboarding')
+  const [themeMode, setThemeMode] = useState(initialThemeMode)
 
   useEffect(() => {
     setStorageItem('appData', appData)
   }, [appData])
+
+  useEffect(() => {
+    setStorageItem('themeMode', themeMode)
+  }, [themeMode])
 
   const userLabel = useMemo(() => {
     if (!profile) {
@@ -115,6 +121,10 @@ function App() {
     }))
   }
 
+  function toggleThemeMode() {
+    setThemeMode((currentThemeMode) => (currentThemeMode === 'light' ? 'dark' : 'light'))
+  }
+
   function renderPage() {
     if (!profile || activePage === 'onboarding') {
       return <Onboarding onComplete={handleOnboardingComplete} />
@@ -138,11 +148,13 @@ function App() {
   }
 
   return (
-    <div className={`app-shell theme-${profile?.avatar.tema ?? 'neon'}`}>
+    <div className={`app-shell theme-${profile?.avatar.tema ?? 'neon'} theme-ui-${themeMode}`}>
       <Header
         activePage={activePage}
         onNavigate={setActivePage}
         profile={profile}
+        themeMode={themeMode}
+        onToggleThemeMode={toggleThemeMode}
         userLabel={userLabel}
       />
       <main className="main-content">{renderPage()}</main>
